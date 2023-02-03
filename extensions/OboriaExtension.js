@@ -1,5 +1,6 @@
 import { UIBaseExtension } from './BaseExtension.js';
-import { getErrorElements,getWarningElements} from '../data/index.js';
+import { getErrorElements, getWarningElements } from '../data/index.js';
+import { ModelSummaryPanel} from './BasePanel.js';
 
 export const OboriaExtensionID = 'Ext.Oboria';
 export class OboriaExtension extends UIBaseExtension {
@@ -48,6 +49,13 @@ export class OboriaExtension extends UIBaseExtension {
     }
 
     _loadModelData() {
+
+        let panel = new ModelSummaryPanel(this.viewer, this.viewer.container, 'my-panel', 'My Panel');
+        panel.setVisible(true);/*
+        panel.addProperty('Key 1', 'Value 1', 'Category 1');
+        panel.addProperty('Key 2', 'Value 2', 'Category 1');
+        panel.addProperty('Key 3', 'Value 3', 'Category 1');
+        panel.addProperty('Key A', 'Value A', 'Category 2');*/
 
         // ALL Extension code should be here
         getErrorElements().forEach(element => {

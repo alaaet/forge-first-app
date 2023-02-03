@@ -6,8 +6,7 @@
   <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
   <!-- The Viewer JS & CSS-->
   <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/style.min.css?v=v7.*" type="text/css">
-  <link rel="stylesheet" href="/main.css">
-  <script language="JavaScript" src="https://developer.api.autodesk.com/modelderivative/v2/viewers/viewer3D.min.js?v=v7.*"></script>
+  <link rel="stylesheet" href="/main.css">  
 </head>
 
 <body>
@@ -15,23 +14,9 @@
     <img class="logo" src="/logo.png" alt="Autodesk Forge">
     <span class="title">Alaa Viewer</span>
     <button id="showAnnotationBtn">Show annotation</button>
-</div>
-<div id="preview"></div>
-
-
-
-  <!-- Developer JS -->
-  <!-- <script>
-      var myViewerDiv = document.getElementById('MyViewerDiv');
-      var viewer = new Autodesk.Viewing.Private.GuiViewer3D(myViewerDiv);
-      var options = {
-          'env' : 'Local',
-          'document' : './model/{3D}.svf' 
-      };
-      Autodesk.Viewing.Initializer(options, function() {
-        viewer.start(options.document, options);
-      });
-  </script> -->
+  </div>
+  <div id="preview"></div>
+  <script language="JavaScript" src="https://developer.api.autodesk.com/modelderivative/v2/viewers/viewer3D.min.js?v=v7.*"></script>
   <script src="/main.js" type="module"></script>
 </body>
 
