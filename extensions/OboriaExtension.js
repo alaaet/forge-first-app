@@ -1,5 +1,5 @@
 import { UIBaseExtension } from './BaseExtension.js';
-import { getErrorElements, getWarningElements } from '../data/index.js';
+import { getErrorElements, getWarningElements,getPanelData } from '../data/index.js';
 import { ModelSummaryPanel} from './BasePanel.js';
 
 export const OboriaExtensionID = 'Ext.Oboria';
@@ -41,6 +41,8 @@ export class OboriaExtension extends UIBaseExtension {
         super.deactivate();
         this._showHideBtn.innerText = 'Show annotation'
         this.viewer.clearThemingColors();
+        const panel = document.getElementById("error-panel");
+        panel.remove();
         return true;
     }
     onToolbarCreated() {
@@ -49,26 +51,32 @@ export class OboriaExtension extends UIBaseExtension {
     }
 
     _loadModelData() {
+    
+        let panel = new ModelSummaryPanel(this.viewer, this.viewer.container, 'error-panel', 'Errors Panel',getPanelData());
+        panel.setVisible(true);
 
-        let panel = new ModelSummaryPanel(this.viewer, this.viewer.container, 'my-panel', 'My Panel');
-        panel.setVisible(true);/*
+        //panel.addProperty('Key 1', 'Value 1', 'Category 1');
+        /*
         panel.addProperty('Key 1', 'Value 1', 'Category 1');
         panel.addProperty('Key 2', 'Value 2', 'Category 1');
         panel.addProperty('Key 3', 'Value 3', 'Category 1');
         panel.addProperty('Key A', 'Value A', 'Category 2');*/
 
         // ALL Extension code should be here
-        getErrorElements().forEach(element => {
-            this.viewer.search(element.id, dbId => {             
-                this.viewer.setThemingColor(dbId, element.color);
-                })
-        });
 
         getWarningElements().forEach(element => {
             this.viewer.search(element.id, dbId => {             
                 this.viewer.setThemingColor(dbId, element.color);
                 })
         });
+        
+        getErrorElements().forEach(element => {
+            this.viewer.search(element.id, dbId => {             
+                this.viewer.setThemingColor(dbId, element.color);
+                })
+        });
+
+
     }
 
 

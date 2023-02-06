@@ -1,17 +1,38 @@
 import db from './db.js';
 console.log("JSON Data:"+JSON.stringify(db))
 const _intensity = 0.5;
-// const color = new THREE.Color();
-// color.setHSL(1, 1.0, 0.5);
-const errorColor = new THREE.Vector4(1.0, 1.0, 0.5, _intensity);
-const warningColor = new THREE.Vector4(1.0,0,0, _intensity);
+const errorColor = new THREE.Vector4(1.0, 0, 0, _intensity);
+const warningColor = new THREE.Vector4(1.0, 1.0, 0.5, _intensity);
 
 export function getErrorElements() { 
-
-    return db.error.map(id => {return { id: id, color: errorColor }; })
+    let errors = [""];
+    for (const elm in db) {
+        if (db.hasOwnProperty(elm)) {
+            errors.push( ...db[elm].error.map(id => {return { id: id, color: errorColor }; }))
+         }
+    }
+    return errors
 }
 
 export function getWarningElements() { 
+    let warnings = [];
+    for (const elm in db) {
+        if (db.hasOwnProperty(elm)) {
+            warnings.push( ...db[elm].warning.map(id => {return { id: id, color: warningColor }; }))
+         }
+    }
+    return warnings
+}
 
-    return db.warning.map(id => {return { id: id, color: warningColor }; })
+export function getPanelData() { 
+    let json = {};
+    for (const elm in db) {
+        if (db.hasOwnProperty(elm)) {
+            json[elm] = {
+                ...db[elm].error.reduce((o, id) => ({ ...o, [id]: "error" }), {}),
+                ...db[elm].warning.reduce((o, id) => ({ ...o, [id]: "warning" }), {})
+            }
+         }
+    }
+    return json;
 }
