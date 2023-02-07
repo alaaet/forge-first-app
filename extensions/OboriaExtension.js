@@ -69,7 +69,7 @@ export class OboriaExtension extends UIBaseExtension {
                 this.viewer.setThemingColor(dbId, element.color);
                 })
         });
-        
+
         getErrorElements().forEach(element => {
             this.viewer.search(element.id, dbId => {             
                 this.viewer.setThemingColor(dbId, element.color);

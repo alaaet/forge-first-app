@@ -23,7 +23,7 @@ export class ModelSummaryPanel extends Autodesk.Viewing.UI.PropertyPanel {
             '<div class="treeview">'
         ]
         for (const category in json) {
-            console.log(json[category])
+            //console.log(json[category])
             if (json.hasOwnProperty(category)) {
                 categoryIds.push("g_"+category.replace(" ","_"));
                 html.push(
