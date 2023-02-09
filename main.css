@@ -62,9 +62,9 @@ body, html {
   }
 
   /* Hide toolbar buttons */
-.adsk-viewing-viewer #toolbar-modelStructureTool{display:none!important}
+/* .adsk-viewing-viewer #toolbar-modelStructureTool{display:none!important}
 .adsk-viewing-viewer #toolbar-explodeTool{display:none!important}
 .adsk-viewing-viewer #toolbar-measurementSubmenuTool{display:none!important}
-.adsk-viewing-viewer #toolbar-sectionTool{display:none!important}
+.adsk-viewing-viewer #toolbar-sectionTool{display:none!important} */
 
 
