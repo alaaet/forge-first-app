@@ -1,8 +1,10 @@
 export class ModelSummaryPanel extends Autodesk.Viewing.UI.PropertyPanel {
     constructor(viewer, container, id, title,contentJSON,options) {
         super(container, id, title, options);
+        const { top } = options;
         this.viewer = viewer;
-        document.viewer = viewer;
+        if (top !== undefined) this.container.style.top = `${top}px`;
+        console.log("TOP: "+top)
         this.loadContent(contentJSON);
     }
 
@@ -10,9 +12,9 @@ export class ModelSummaryPanel extends Autodesk.Viewing.UI.PropertyPanel {
         this.title = this.createTitleBar(this.titleLabel || this.container.id);
         this.initializeMoveHandlers(this.title);
         this.container.appendChild(this.title);
-        this.container.style.width = "350px";
+        this.container.style.width = "300px";
         this.container.style.resize = "auto";
-        this.container.style.height = '350px';
+        this.container.style.height = '300px';        
 
     }
 
@@ -60,7 +62,11 @@ export class ModelSummaryPanel extends Autodesk.Viewing.UI.PropertyPanel {
         
         let fitToView = (selectorFun, ev) => { 
             let revitId = selectorFun(ev);
-            this.viewer.search(revitId, dbId => { this.viewer.fitToView(dbId); })  
+            this.viewer.search(revitId, dbId => {
+                this.viewer.fitToView(dbId);
+                this.viewer.select(dbId);
+                this.viewer.isolate(dbId);
+            })  
         }
 
 

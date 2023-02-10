@@ -1,11 +1,15 @@
 import { UIBaseExtension } from './BaseExtension.js';
-import { getErrorElements, getWarningElements,getPanelData } from '../data/index.js';
+import { getErrorElements, getWarningElements,getSpeakersPanelData, getLuminariesPanelData } from '../data/index.js';
 import { ModelSummaryPanel} from './BasePanel.js';
+import models from '../data/models.js';
+
 
 export const OboriaExtensionID = 'Ext.Oboria';
 export class OboriaExtension extends UIBaseExtension {
     constructor(viewer, options) {
         super(viewer, options);
+        this.luminariesPanelId = "luminaries-panel";
+        this.speakersPanelId = "speakers-panel";
     }
     
     async load() {
@@ -41,8 +45,10 @@ export class OboriaExtension extends UIBaseExtension {
         super.deactivate();
         this._showHideBtn.innerText = 'Show annotation'
         this.viewer.clearThemingColors();
-        const panel = document.getElementById("error-panel");
-        panel.remove();
+        const luminaries_panel = document.getElementById(this.luminariesPanelId);
+        luminaries_panel.remove();
+        const speakers_panel = document.getElementById(this.speakersPanelId);
+        speakers_panel.remove();
         return true;
     }
     onToolbarCreated() {
@@ -51,16 +57,13 @@ export class OboriaExtension extends UIBaseExtension {
     }
 
     _loadModelData() {
-    
-        let panel = new ModelSummaryPanel(this.viewer, this.viewer.container, 'error-panel', 'Errors Panel',getPanelData());
-        panel.setVisible(true);
+        const modelsNames = Object.keys(models)
+        var select = document.getElementById('models');
+        let luminaries_panel = new ModelSummaryPanel(this.viewer, this.viewer.container, this.luminariesPanelId, `${modelsNames[select.value]} Luminaries`, getLuminariesPanelData(modelsNames[select.value]), {top:10});
+        luminaries_panel.setVisible(true);
 
-        //panel.addProperty('Key 1', 'Value 1', 'Category 1');
-        /*
-        panel.addProperty('Key 1', 'Value 1', 'Category 1');
-        panel.addProperty('Key 2', 'Value 2', 'Category 1');
-        panel.addProperty('Key 3', 'Value 3', 'Category 1');
-        panel.addProperty('Key A', 'Value A', 'Category 2');*/
+        let speakers_panel = new ModelSummaryPanel(this.viewer, this.viewer.container, this.speakersPanelId, `${modelsNames[select.value]} Speakers`,getSpeakersPanelData(modelsNames[select.value]), {top:320});
+        speakers_panel.setVisible(true);
 
         // ALL Extension code should be here
 

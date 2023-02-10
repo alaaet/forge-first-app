@@ -1,4 +1,7 @@
 import db from './db.js';
+import luminaries from './moons_luminaries.js';
+import speakers from './moons_speakers.js';
+
 //console.log("JSON Data:"+JSON.stringify(db))
 const _intensity = 0.5;
 const errorColor = new THREE.Vector4(1.0, 0, 0, _intensity);
@@ -34,5 +37,37 @@ export function getPanelData() {
             }
          }
     }
+    return json;
+}
+
+export function getLuminariesPanelData(moon) { 
+    let json = {};
+
+    if (luminaries.hasOwnProperty(moon)) {
+        for (const elm in luminaries[moon])
+        { 
+            if (luminaries[moon].hasOwnProperty(elm))
+            {
+                json[elm] = luminaries[moon][elm].reduce((o, id) => ({ ...o, [id]: "N/A" }), {})                
+            }
+        }
+    }
+    
+    return json;
+}
+
+export function getSpeakersPanelData(moon) { 
+    let json = {};
+
+    if (speakers.hasOwnProperty(moon)) {
+        for (const elm in speakers[moon])
+        { 
+            if (speakers[moon].hasOwnProperty(elm))
+            {
+                json[elm] = speakers[moon][elm].reduce((o, id) => ({ ...o, [id]: "N/A" }), {})                
+            }
+        }
+    }
+    
     return json;
 }
