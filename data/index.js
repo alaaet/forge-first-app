@@ -1,4 +1,6 @@
 import db from './db.js';
+import light from './light.js';
+import models from './models.js';
 //console.log("JSON Data:"+JSON.stringify(db))
 const _intensity = 0.5;
 const errorColor = new THREE.Vector4(1.0, 0, 0, _intensity);
@@ -27,6 +29,7 @@ export function getWarningElements() {
 export function getPanelData() { 
     let json = {};
     for (const elm in db) {
+        
         if (db.hasOwnProperty(elm)) {
             json[elm] = {
                 ...db[elm].error.reduce((o, id) => ({ ...o, [id]: "error" }), {}),
@@ -35,4 +38,15 @@ export function getPanelData() {
          }
     }
     return json;
+}
+
+export function getModelLight(){
+
+    let json = {};
+
+    for (const el in light){
+        json[el] = {'advios':'jhstd'}
+    }
+    
+    return json//={'hola':{'advios':'jhstd'}};
 }

@@ -6,6 +6,7 @@ const modelsNames = Object.keys(models)
 const initViewerWithDocument = doc => { 
     const config = {
       extensions: [OboriaExtensionID]
+
   };
   
   var myViewerDiv = document.getElementById('preview');

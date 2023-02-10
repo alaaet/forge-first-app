@@ -1,8 +1,9 @@
 export default
     {
-        '00-Maze Model': './models/00-Maze Model/00-Maze Model/output.svf',
+        
+        '00-Basic View': './models/00-Basic View/00-Basic View/output.svf',
         '01-Maple Sugar Moon': './models/01-Maple Sugar Moon/01-Maple Sugar Moon/output.svf',
-        '02-Peeping Frog': './models/02-Peeping Frog Moon/02-Peeping Frog Moon/output.svf',
+        '02-Peeping Frog Moon': './models/02-Peeping Frog Moon/02-Peeping Frog Moon/output.svf',
         '03-Corn Planting Moon': './models/03-Corn Planting Moon/03-Corn Planting Moon/output.svf',
         '04-Strawberry Moon': './models/04-Strawberry Moon/04-Strawberry Moon/output.svf',
         '05-Thunder Moon': './models/05-Thunder Moon/05-Thunder Moon/output.svf',
@@ -18,6 +19,5 @@ export default
         '15-Exit': './models/15-Exit/15-Exit/output.svf',
         '16-South Control Room': './models/16-South Control Room/16-South Control Room/output.svf',
         '17-North Control Room': './models/17-North Control Room/17-North Control Room/output.svf',
-        '18_Conduit Distribution': './models/18_Conduit Distribution/18_Conduit Distribution/output.svf',
-    
+        '18_Conduit Distribution': './models/18_Conduit Distribution/18_Conduit Distribution/output.svf'
     }

@@ -1,6 +1,9 @@
 import { UIBaseExtension } from './BaseExtension.js';
-import { getErrorElements, getWarningElements,getPanelData } from '../data/index.js';
+import { getErrorElements, getWarningElements,getPanelData, getModelLight } from '../data/index.js';
 import { ModelSummaryPanel} from './BasePanel.js';
+import models from '../data/models.js';
+
+
 
 export const OboriaExtensionID = 'Ext.Oboria';
 export class OboriaExtension extends UIBaseExtension {
@@ -46,15 +49,22 @@ export class OboriaExtension extends UIBaseExtension {
         return true;
     }
     onToolbarCreated() {
-        this.createToolbarButton('oboria-ext-btn', 'Oboria Data', 'https://img.icons8.com/ios-filled/50/null/medium-risk.png');
+        this.createToolbarButton('oboria-ext-btn', 'Oboria Data', 'https://img.icons8.com/dotty/80/null/light-on.png');
+        //this.createToolbarButton('oboria-ligth-btn','Oboria Ligth','images/icons8-grid-3-100.png')
 
     }
 
     _loadModelData() {
     
-        let panel = new ModelSummaryPanel(this.viewer, this.viewer.container, 'error-panel', 'Errors Panel',getPanelData());
-        panel.setVisible(true);
 
+        let msP= this.load.name;
+        
+        let panel = new ModelSummaryPanel(this.viewer, this.viewer.container, 'error-panel', msP,getPanelData());
+
+        //let panel = new ModelSummaryPanel()
+        panel.setVisible(true);
+        
+        
         //panel.addProperty('Key 1', 'Value 1', 'Category 1');
         /*
         panel.addProperty('Key 1', 'Value 1', 'Category 1');
@@ -64,7 +74,7 @@ export class OboriaExtension extends UIBaseExtension {
 
         // ALL Extension code should be here
 
-        getWarningElements().forEach(element => {
+       /*  getWarningElements().forEach(element => {
             this.viewer.search(element.id, dbId => {             
                 this.viewer.setThemingColor(dbId, element.color);
                 })
@@ -74,8 +84,8 @@ export class OboriaExtension extends UIBaseExtension {
             this.viewer.search(element.id, dbId => {             
                 this.viewer.setThemingColor(dbId, element.color);
                 })
-        });
-
+        }); */
+       
 
     }
 
