@@ -62,11 +62,20 @@ export class ModelSummaryPanel extends Autodesk.Viewing.UI.PropertyPanel {
         
         let fitToView = (selectorFun, ev) => { 
             let revitId = selectorFun(ev);
-            this.viewer.search(revitId, dbId => {
-                this.viewer.fitToView(dbId);
-                this.viewer.select(dbId);
-                this.viewer.isolate(dbId);
-            })  
+            if (revitId !== undefined) {
+                this.viewer.search(revitId, dbId => {
+                    //this.viewer.fitToView(dbId);
+                    this.viewer.select(dbId);
+                    var box = this.viewer.utilities.getBoundingBox();
+                    box.expandByScalar( 2 );
+                    this.viewer.isolate(dbId);
+                    this.viewer.navigation.fitBounds(true,box,false,false)
+                    // var direction = new THREE.Vector3(), sb = this.viewer.getCamera();
+                    // sb.getWorldDirection(direction);
+                    // sb.position.add(100);
+                    // this.viewer.navigation.setView(sb.position, this.viewer.navigation.getTarget())
+                })
+            }
         }
 
 
