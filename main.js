@@ -2,6 +2,8 @@ import { OboriaExtensionID } from './extensions/index.js'
 import models from './data/models.js';
 
 const modelsNames = Object.keys(models)
+let viewer;
+const searchResultsMaxSize = 100;
 
 const initViewerWithDocument = doc => { 
     const config = {
@@ -10,7 +12,7 @@ const initViewerWithDocument = doc => {
   };
   
   var myViewerDiv = document.getElementById('preview');
-  var viewer = new Autodesk.Viewing.Private.GuiViewer3D(myViewerDiv, config);
+  viewer = new Autodesk.Viewing.Private.GuiViewer3D(myViewerDiv, config);
   
   var options = {
     'env': 'Local',
@@ -41,3 +43,30 @@ select.addEventListener("change", function () {
   initViewerWithDocument(models[modelsNames[select.value]])
 });
 
+var searchBtn = document.getElementById('search_btn'); 
+var searchData = document.getElementById('search_data'); 
+searchBtn.addEventListener('click', () => {
+  if (searchData.value === "") {
+    alert("please enter a search term")
+    return
+  }
+  if (viewer) {
+    
+    viewer.search(searchData.value, dbId => {  
+      if (Array.isArray(dbId))
+      { 
+        let arr = [...dbId]
+        if (arr.length > searchResultsMaxSize) arr.length = searchResultsMaxSize;
+        console.log(arr)
+        viewer.select(arr);
+        var box = viewer.utilities.getBoundingBox();
+        box.expandByScalar( 2 );
+        viewer.isolate(arr);
+        viewer.navigation.fitBounds(true,box,false,false)
+      }
+
+    }, err => { 
+      alert(err)
+    }, {includeInherited:true})
+  }
+}); 
