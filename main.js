@@ -70,3 +70,9 @@ searchBtn.addEventListener('click', () => {
     }, {includeInherited:true})
   }
 }); 
+
+searchData.addEventListener("keypress", e => {   
+  if (e.code === "Enter") {
+    searchBtn.click()
+  }
+},false)
